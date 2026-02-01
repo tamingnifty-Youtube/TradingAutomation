@@ -67,7 +67,7 @@ def exit_strangle(reason):
     strangle_exit_price = buy_price_call + buy_price_put
     pnl = (strategy['strangle_entry_price'] - strangle_exit_price) * strategy['quantity']
     net_pnl = pnl - .002 * abs(pnl)
-    strategies.update_one({'_id': strategy['_id']}, {'$set': {'strangle_exit_price': strangle_exit_price, 'exit_time': datetime.now().strftime('%H:%M'), 'strategy_state': "Exited", 'exit_reason': reason, 'pnl': pnl, 'net_pnl': net_pnl}})
+    strategies.update_one({'_id': strategy['_id']}, {'$set': {'strangle_exit_price': strangle_exit_price, 'exit_time': datetime.now().strftime('%H:%M'), 'strategy_state': "Exited", 'exit_reason': reason, 'pnl': round(pnl,2), 'net_pnl': round(net_pnl,2)}})
 
 def get_pnl(strategy):
     current_call_price = edge.fetch_ltp(edge.login_to_integrate(), 'NFO' , strategy['call_option_symbol'])
