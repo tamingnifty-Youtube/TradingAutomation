@@ -30,7 +30,7 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t ${{ secrets.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }} -f strangle/Dockerfile .
+        docker build -t ${{ secrets.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}  ./strangle
         docker push ${{ secrets.AZURE_CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}
 
     - name: Deploy to Azure Container App Job
